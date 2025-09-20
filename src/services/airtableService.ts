@@ -1,9 +1,15 @@
 import type { AxiosInstance } from 'axios'
 import axios, { AxiosError } from 'axios'
 import type {
+  CreateEventRequest,
+  UpdateEventRequest,
+  CreateRSVPRequest,
+  UpdateRSVPRequest,
+  CreateOrganizerRequest
+} from '../types'
+import type {
     AirtableRecord,
     AirtableResponse,
-    CreateEventRequest,
     Event,
     Organizer,
     RSVP
