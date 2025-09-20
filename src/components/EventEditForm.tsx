@@ -298,7 +298,7 @@ export const EventEditForm: React.FC<EventEditFormProps> = ({
               type="submit"
               variant="contained"
               disabled={loading || !isDirty}
-              startIcon={loading ? <LoadingSpinner size={20} /> : <Save />}
+              startIcon={loading ? <LoadingSpinner size={20} iconOnly /> : <Save />}
             >
               {loading ? 'Saving...' : 'Save Changes'}
             </Button>

@@ -131,7 +131,7 @@ export const RSVPStatus = ({ rsvp, onCancelRSVP, isLoading = false }: RSVPStatus
             color="error" 
             variant="contained"
             disabled={isCancelling}
-            startIcon={isCancelling ? <LoadingSpinner size={16} /> : <Cancel />}
+            startIcon={isCancelling ? <LoadingSpinner size={16} iconOnly /> : <Cancel />}
           >
             {isCancelling ? 'Cancelling...' : 'Cancel RSVP'}
           </Button>

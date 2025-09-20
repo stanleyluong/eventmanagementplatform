@@ -240,7 +240,7 @@ export const AttendeeList = ({
                     }}
                   >
                     {cancellingRSVPId === rsvp.id ? (
-                      <LoadingSpinner size={16} />
+                      <LoadingSpinner size={16} iconOnly />
                     ) : (
                       <Cancel fontSize="small" />
                     )}
@@ -268,17 +268,16 @@ export const AttendeeList = ({
         </DialogContent>
         <DialogActions>
           <Button 
-            onClick={handleCancelDialogClose} 
+            startIcon={!cancellingRSVPId && <Cancel />}
             disabled={!!cancellingRSVPId}
           >
-            Keep RSVP
+            {cancellingRSVPId ? 'Processing...' : 'Keep RSVP'}
           </Button>
           <Button 
             onClick={handleCancelConfirm} 
             color="error" 
             variant="contained"
             disabled={!!cancellingRSVPId}
-            startIcon={cancellingRSVPId ? <LoadingSpinner size={16} /> : <Cancel />}
           >
             {cancellingRSVPId ? 'Cancelling...' : 'Cancel RSVP'}
           </Button>

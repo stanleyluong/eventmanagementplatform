@@ -257,7 +257,7 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
               type="submit"
               variant="contained"
               disabled={isSubmitting}
-              startIcon={isSubmitting ? <LoadingSpinner size={20} /> : undefined}
+              startIcon={isSubmitting ? <LoadingSpinner size={20} iconOnly /> : undefined}
               size="large"
             >
               {isSubmitting ? 'Creating Event...' : 'Create Event'}
