@@ -207,11 +207,11 @@ export const AttendeeList = ({
                   </Typography>
                 }
                 secondary={
-                  <Box>
-                    <Typography variant="body2" color="text.secondary">
+                  <div>
+                    <Typography component="div" variant="body2" color="text.secondary">
                       {rsvp.attendeeEmail}
                     </Typography>
-                    <Typography variant="caption" color="text.disabled">
+                    <Typography component="div" variant="caption" color="text.disabled">
                       RSVP'd {new Date(rsvp.createdAt).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -219,7 +219,7 @@ export const AttendeeList = ({
                         minute: '2-digit'
                       })}
                     </Typography>
-                  </Box>
+                  </div>
                 }
               />
 
