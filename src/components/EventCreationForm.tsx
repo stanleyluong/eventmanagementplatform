@@ -34,6 +34,8 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
   const [createdEvent, setCreatedEvent] = useState<Event | null>(null)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
+  const [isCheckingOrganizer, setIsCheckingOrganizer] = useState(true)
+  const [hasOrganizer, setHasOrganizer] = useState(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
 
@@ -43,8 +45,19 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
     if (!savedOrganizer) {
       showNotification('Please set up your organizer profile first', 'warning')
       navigate('/dashboard')
+    } else {
+      setHasOrganizer(true)
     }
+    setIsCheckingOrganizer(false)
   }, [navigate, showNotification])
+
+  if (isCheckingOrganizer) {
+    return <LoadingSpinner message="Loading organizer information..." />
+  }
+
+  if (!hasOrganizer) {
+    return null; // Will be redirected by the useEffect
+  }
 
   // Get organizer from localStorage
   const getOrganizerId = () => {
