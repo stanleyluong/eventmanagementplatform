@@ -13,7 +13,6 @@ import {
     Chip,
     Container,
     Divider,
-    Grid,
     Link,
     Paper,
     Stack,
@@ -112,100 +111,104 @@ export const AboutPage = () => {
           Technology Stack
         </Typography>
 
-        <Grid container spacing={3} sx={{ mb: 5 }}>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' }, 
+          gap: 3, 
+          mb: 5 
+        }}>
           {Object.entries(techStack).map(([key, section]) => (
-            <Grid size={{ xs: 12, md: 6 }} key={key}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    {section.icon}
-                    <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
-                      {section.title}
-                    </Typography>
-                  </Box>
-                  <Stack spacing={2}>
-                    {section.technologies.map((tech, index) => (
-                      <Box key={index}>
-                        <Typography variant="subtitle2" color="primary" gutterBottom>
-                          {tech.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {tech.description}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card key={key} sx={{ height: '100%' }}>
+              <CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  {section.icon}
+                  <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
+                    {section.title}
+                  </Typography>
+                </Box>
+                <Stack spacing={2}>
+                  {section.technologies.map((tech, index) => (
+                    <Box key={index}>
+                      <Typography variant="subtitle2" color="primary" gutterBottom>
+                        {tech.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {tech.description}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
+        </Box>
 
         <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 3 }}>
           Key Features
         </Typography>
 
         <Paper sx={{ p: 3, mb: 4 }}>
-          <Grid container spacing={1}>
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, 
+            gap: 1 
+          }}>
             {features.map((feature, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-                <Chip 
-                  label={feature} 
-                  variant="outlined" 
-                  sx={{ mb: 1, width: '100%', justifyContent: 'flex-start' }}
-                />
-              </Grid>
+              <Chip 
+                key={index}
+                label={feature} 
+                variant="outlined" 
+                sx={{ mb: 1, width: '100%', justifyContent: 'flex-start' }}
+              />
             ))}
-          </Grid>
+          </Box>
         </Paper>
 
         <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 3 }}>
           Architecture Highlights
         </Typography>
 
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom color="primary">
-                  Modern React Architecture
-                </Typography>
-                <Typography variant="body2">
-                  Built with React 18 using functional components, hooks, and TypeScript for 
-                  type safety. Implements lazy loading and code splitting for optimal performance.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, 
+          gap: 3 
+        }}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom color="primary">
+                Modern React Architecture
+              </Typography>
+              <Typography variant="body2">
+                Built with React 18 using functional components, hooks, and TypeScript for 
+                type safety. Implements lazy loading and code splitting for optimal performance.
+              </Typography>
+            </CardContent>
+          </Card>
           
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom color="primary">
-                  Cloud-First Backend
-                </Typography>
-                <Typography variant="body2">
-                  Leverages Airtable as a backend-as-a-service for rapid development and 
-                  scalability, with RESTful API integration for all data operations.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom color="primary">
+                Cloud-First Backend
+              </Typography>
+              <Typography variant="body2">
+                Leverages Airtable as a backend-as-a-service for rapid development and 
+                scalability, with RESTful API integration for all data operations.
+              </Typography>
+            </CardContent>
+          </Card>
           
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom color="primary">
-                  Production-Ready Deployment
-                </Typography>
-                <Typography variant="body2">
-                  Deployed on AWS Amplify with automatic CI/CD pipeline, ensuring reliable 
-                  hosting with global CDN distribution and HTTPS security.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom color="primary">
+                Production-Ready Deployment
+              </Typography>
+              <Typography variant="body2">
+                Deployed on AWS Amplify with automatic CI/CD pipeline, ensuring reliable 
+                hosting with global CDN distribution and HTTPS security.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
 
         <Box sx={{ mt: 5, p: 3, bgcolor: 'grey.50', borderRadius: 2 }}>
           <Typography variant="h6" gutterBottom>
