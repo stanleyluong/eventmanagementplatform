@@ -17,6 +17,7 @@ if (import.meta.env.DEV) {
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })))
+const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
 const CreateEventPage = lazy(() => import('./pages/CreateEventPage').then(module => ({ default: module.CreateEventPage })))
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(module => ({ default: module.DashboardPage })))
 const EventDetailsPage = lazy(() => import('./pages/EventDetailsPage').then(module => ({ default: module.EventDetailsPage })))
@@ -96,6 +97,7 @@ function App() {
                 <Suspense fallback={<LoadingSpinner message="Loading page..." />}>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
                     <Route path="/create-event" element={<CreateEventPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/events/:eventId" element={<EventDetailsPage />} />

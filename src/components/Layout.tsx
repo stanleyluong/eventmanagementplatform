@@ -25,6 +25,7 @@ interface LayoutProps {
 
 const navigationItems = [
   { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
   { label: 'Create Event', path: '/create-event' },
   { label: 'My Events', path: '/dashboard' }
 ]
