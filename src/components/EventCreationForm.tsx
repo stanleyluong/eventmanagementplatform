@@ -39,26 +39,6 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
   const { showNotification } = useNotification()
   const navigate = useNavigate()
 
-  // Check if user has an organizer profile
-  useEffect(() => {
-    const savedOrganizer = localStorage.getItem('organizer')
-    if (!savedOrganizer) {
-      showNotification('Please set up your organizer profile first', 'warning')
-      navigate('/dashboard')
-    } else {
-      setHasOrganizer(true)
-    }
-    setIsCheckingOrganizer(false)
-  }, [navigate, showNotification])
-
-  if (isCheckingOrganizer) {
-    return <LoadingSpinner message="Loading organizer information..." />
-  }
-
-  if (!hasOrganizer) {
-    return null; // Will be redirected by the useEffect
-  }
-
   // Get organizer from localStorage
   const getOrganizerId = () => {
     const savedOrganizer = localStorage.getItem('organizer')
@@ -69,6 +49,7 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
     return 'temp-organizer-id' // Fallback
   }
 
+  // Initialize form hook BEFORE any conditional returns
   const {
     control,
     handleSubmit,
@@ -86,6 +67,27 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
       organizerId: getOrganizerId()
     }
   })
+
+  // Check if user has an organizer profile
+  useEffect(() => {
+    const savedOrganizer = localStorage.getItem('organizer')
+    if (!savedOrganizer) {
+      showNotification('Please set up your organizer profile first', 'warning')
+      navigate('/dashboard')
+    } else {
+      setHasOrganizer(true)
+    }
+    setIsCheckingOrganizer(false)
+  }, [navigate, showNotification])
+
+  // Handle conditional rendering AFTER all hooks are called
+  if (isCheckingOrganizer) {
+    return <LoadingSpinner message="Loading organizer information..." />
+  }
+
+  if (!hasOrganizer) {
+    return null; // Will be redirected by the useEffect
+  }
 
   const onSubmit = async (data: CreateEventFormData) => {
     setIsSubmitting(true)
