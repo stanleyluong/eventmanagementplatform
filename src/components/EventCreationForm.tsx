@@ -17,7 +17,7 @@ import {
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { airtableService } from '../services/airtableService'
@@ -36,6 +36,7 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
   const [linkCopied, setLinkCopied] = useState(false)
   const [isCheckingOrganizer, setIsCheckingOrganizer] = useState(true)
   const [hasOrganizer, setHasOrganizer] = useState(false)
+  const hasCheckedOrganizer = useRef(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
 
@@ -70,6 +71,8 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
 
   // Check if user has an organizer profile
   useEffect(() => {
+    if (hasCheckedOrganizer.current) return
+
     const savedOrganizer = localStorage.getItem('organizer')
     if (!savedOrganizer) {
       showNotification('Please set up your organizer profile first', 'warning')
@@ -77,7 +80,9 @@ export const EventCreationForm: React.FC<EventCreationFormProps> = ({ onEventCre
     } else {
       setHasOrganizer(true)
     }
+    
     setIsCheckingOrganizer(false)
+    hasCheckedOrganizer.current = true
   }, [navigate, showNotification])
 
   // Handle conditional rendering AFTER all hooks are called
